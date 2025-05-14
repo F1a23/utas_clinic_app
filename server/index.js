@@ -1423,6 +1423,22 @@ app.get("/getAllMedicationRequests", async (req, res) => {
 });
 
 //---------------------------------------------------------------
+import path from "path";
+import { fileURLToPath } from "url";
+
+// دعم __dirname في ES Module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ✅ استخدم هذا فقط في بيئة الإنتاج
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client", "build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+}
+
 // Start server
 const port = ENV.PORT || 3001;
 app.listen(port, () => {
