@@ -14,7 +14,7 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import multer from "multer";
 import fs from "fs";
-import AnnouncementModel from "./models/AnnouncementModel.js";
+import AnnouncementModel from "./Models/AnnouncementModel.js";
 import PrescriptionModel from "./Models/PrescriptionModel.js";
 
 import ContactMode from "./Models/ContactMode.js";
