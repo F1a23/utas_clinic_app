@@ -16,18 +16,29 @@ import multer from "multer";
 import fs from "fs";
 import AnnouncementModel from "./Models/AnnouncementModel.js";
 import PrescriptionModel from "./Models/PrescriptionModel.js";
-
 import ContactMode from "./Models/ContactMode.js";
+
+dotenv.config();
+
 const app = express();
 app.use(express.json());
 
+// إعداد CORS يدعم عدة origins من CLIENT_URL
+const allowedOrigins = process.env.CLIENT_URL.split(",");
+
 app.use(
   cors({
-    origin: "http://localhost:3000", // السماح للفرونت المحلي
-    credentials: true, // فقط إذا كنت تستخدم الكوكيز (مثلاً لجلسة تسجيل الدخول)
+    origin: function (origin, callback) {
+      // إذا لم يوجد origin (في حالة curl مثلًا) أو موجود في القائمة
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
-
 app.use(express.urlencoded({ extended: true }));
 // Database connection
 const connectString = `mongodb+srv://${ENV.DB_USER}:${ENV.DB_PASSWORD}@${ENV.DB_CLUSTER}/${ENV.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
