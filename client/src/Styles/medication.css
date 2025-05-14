@@ -1,0 +1,344 @@
+
+
+.medicine-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.medicine-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 15px;
+  padding: 60px 30px;
+  background: linear-gradient(to bottom right, #dde7f5, #f8fbfe, #f7f7f7);
+  height: 100%;
+  margin: 10px;
+  transform: scale(0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.medicine-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(95, 108, 255, 0.3);
+}
+
+.medicine-image {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.medicine-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #007bff;
+  margin-bottom: 8px;
+}
+
+.medicine-card-text {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 6px;
+}
+.med-cart-header {
+  background-color: #e8f0ff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 64, 128, 0.1);
+  transition: 0.3s;
+}
+
+.med-cart-icon {
+  color: #007bff;
+  transition: transform 0.3s ease;
+}
+
+.med-trash-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.med-trash-icon:hover,
+.med-cart-icon:hover {
+  transform: scale(1.1);
+}
+
+.med-selected-text {
+  font-size: 1rem;
+  color: #004080;
+}
+
+/* العنوان مع خط متحرك تحته */
+.medicine-title.animated-underline {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto 20px auto;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #003366;
+}
+
+.medicine-title.animated-underline::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: #007bff;
+  border-radius: 2px;
+  animation: slide-in 1s ease-in-out;
+}
+
+@keyframes slide-in {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 80px;
+    opacity: 1;
+  }
+}
+.med-cart-header {
+  background-color: #e8f0ff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 64, 128, 0.1);
+  transition: 0.3s;
+}
+
+.med-cart-icon-wrapper {
+  position: relative;
+}
+
+.med-cart-icon {
+  color: #004080;
+  transition: transform 0.3s ease;
+}
+
+.med-trash-icon {
+  color: #dc3545;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.med-trash-icon:hover,
+.med-cart-icon:hover {
+  transform: scale(1.1);
+}
+
+/* الرقم الأحمر */
+.med-cart-badge {
+  position: absolute;
+  top: -10px;
+  right: -12px;
+  background-color: #dc3545;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+/* نبض عند وجود عناصر */
+.pulse {
+  animation: pulse-bounce 1.3s infinite;
+}
+
+@keyframes pulse-bounce {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.6);
+  }
+  70% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+  }
+}
+.med-search-input,
+.med-sort-select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  min-width: 200px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s ease-in-out;
+  width: 5%;
+  
+}
+.medicine-submit-btn {
+  padding:20px 20px 10px 20px;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  font-weight: 600;
+  background: linear-gradient(to right, #007bff, #0056b3);
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.medicine-submit-btn:hover {
+  transform: scale(1.03);
+  background: linear-gradient(to right, #0056b3, #004080);
+}
+
+.med-search-input:focus,
+.med-sort-select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+.med-sort-select {
+  
+width: 5%;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #cce0f5;
+  background-color: #f5faff;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #004080;
+  box-shadow: 0 2px 6px rgba(0, 64, 128, 0.1);
+  transition: all 0.3s ease;
+}
+
+.med-sort-select:hover {
+  background-color: #e7f1ff;
+  cursor: pointer;
+}
+
+.med-sort-select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+.med-cart-header .med-cart-icon-wrapper {
+  margin-right: 20px;
+}
+.medicine-submit-btn{
+  width: 30%;
+  font-size: 1.2rem;
+}
+
+
+.summary-wrapper {
+  background: linear-gradient(to bottom right, #f4f6f9, #dbefff);
+  padding: 60px 30px;
+  min-height: 100vh;
+}
+
+.summary-container {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 64, 128, 0.08);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.summary-title {
+  text-align: center;
+  font-size: 2.7rem;
+  font-weight: bold;
+  color: #004080;
+  margin-bottom: 30px;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+
+.summary-block {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #f0f8ff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+}
+
+.summary-block h5 {
+  color: #004080;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.summary-block p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.summary-med-item {
+  padding: 15px;
+  background-color: #f8fcff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
+}
+
+.summary-med-item p {
+  margin: 0;
+}
+
+.summary-btns-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.btn-sum-back {
+  background-color: #585757 !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 10px 30px !important;
+  font-weight: bold !important;
+  font-size: 1rem !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+  width: 180px;
+}
+
+.btn-sum-back:hover {
+  background-color: #000000 !important;
+  transform: scale(1.05) !important;
+}
+
+.btn-sum-confirm {
+  background-color: #1511a3 !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 10px 30px !important;
+  font-weight: bold !important;
+  font-size: 1rem !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+  width: 180px;
+}
+
+.btn-sum-confirm:hover {
+  background-color: #215188 !important;
+  transform: scale(1.05) !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

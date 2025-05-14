@@ -1,0 +1,97 @@
+.medicine-container {
+    background: linear-gradient(to bottom right, #f4f6f9, #dbefff);
+    padding: 40px 20px;
+    border-radius: 12px;
+    padding: 150px;
+  }
+  
+  .medicine-title {
+    font-size: 2.8rem;
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 30px;
+  text-align: center;
+ 
+  }
+  
+  .medicine-alert {
+    font-size: 1rem;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .medicine-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 14px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.663);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 15px;
+    background: rgb(248, 252, 255);
+    height: 100%;
+    margin: 10pX 10pX 10pX 10pX;
+    transform: scale(0.85);
+    
+  }
+ 
+  
+  .medicine-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(95, 108, 255, 0.916);
+  }
+  
+  .medicine-image {
+    height: 160px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .medicine-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #007bff;
+    margin-bottom: 8px;
+  }
+  
+  .medicine-card-text {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 6px;
+  }
+  
+  .medicine-card-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .medicine-card-buttons .btn {
+    width: 48%;
+    font-weight: 500;
+  }
+  
+  .medicine-modal-input {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+  }
+  
+  .medicine-modal-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+    outline: none;
+  }
+  .medicine-search-input {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: block;
+  }
+  

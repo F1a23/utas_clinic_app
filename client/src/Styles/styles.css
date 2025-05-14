@@ -1,0 +1,264 @@
+/* ✅ ضبط شريط التنقل */
+.navbar {
+  padding: 12px 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+ background: linear-gradient(to bottom right , #a8a8a8fc, #e2e1e100, #ffffff00);
+}
+
+/* ✅ ضبط حجم عناصر التنقل */
+.navbar-nav .nav-link {
+  font-size: 2rem;
+  padding: 10px 14px;
+  color: #333;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+/* ✅ شعار العيادة */
+.logo {
+  width: 70px;
+  height: auto;
+  margin: 0 15px;
+}
+
+
+
+
+/* ✅ استجابة أفضل للعرض */
+@media (max-width: 992px) {
+  .navbar-nav {
+    gap: 10px;
+  }
+
+  form.search {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .theme-toggle,
+  .btn-primary,
+  .btn-outline-secondary {
+    margin-top: 10px;
+  }
+}
+
+.nav-search-wrapper {
+  position: relative;
+  width: 200px;
+}
+
+.nav-search-input {
+  width: 100%;
+ 
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  height: 38px;
+  box-sizing: border-box;
+  background-color: #f9f8e786;
+}
+
+
+.nav-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #007bff;
+  font-size: 1rem;
+  pointer-events: none; 
+  z-index: 2;
+
+}
+.header-right-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.header-right-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 3px; 
+}
+
+.nav-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-search-input {
+  padding: 8px 12px 8px 38px; /* ← زِد padding-left لتوسيع بعد الأيقونة */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  height: 40px;
+  font-size: 0.95rem;
+  width: 200px;
+  box-sizing: border-box;
+  background-color: #f9f8e786;
+  line-height: 1.4; /* ← لتحسين ظهور النص */
+}
+.nav-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 200px;
+}
+
+
+.nav-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #007bff;
+  pointer-events: none;
+}
+
+/* ✅ أزرار موحدة */
+.header-btn {
+  height: 38px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  color: #363a06;
+}
+
+/* ✅ زر اللغة */
+.lang-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+
+.profile-btn svg {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.profile-btn:hover svg {
+  transform: scale(1.15);
+}
+/* ✅ تكبير حجم عناصر التنقل */
+.navbar-nav .nav-link {
+  font-size: 1.05rem; /* ← أكبر قليلاً */
+  padding: 12px 16px;
+}
+
+/* ✅ تكبير شعار العيادة */
+.logo {
+  width: 85px;  /* ← كان 70px */
+  margin: 0 20px;
+}
+
+/* ✅ تكبير حقل البحث */
+.nav-search-input {
+  height: 44px;           /* ← كان 40px */
+  font-size: 1rem;        /* ← كان 0.95rem */
+  padding: 10px 12px 10px 40px; /* ← أكثر تباعدًا من اليسار */
+}
+
+/* ✅ تكبير أيقونة البحث */
+.nav-search-icon {
+  font-size: 1.2rem;     /* ← كان 1rem */
+  left: 12px;
+}
+
+/* ✅ تكبير الأزرار */
+.header-btn {
+  height: 44px;
+  font-size: 1rem;
+  padding: 8px 14px;
+  margin: 0;
+}
+
+
+.profile-btn svg {
+  width: 44px;
+  height: 44px;
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 20px; 
+}
+
+.navbar-nav .nav-link {
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+ font-size: 1.1rem;
+ text-align: center;
+}
+
+/* ✅ عند تمرير السهم: خلفية زرقاء ونص أبيض */
+.navbar-nav .nav-link:hover {
+  background-color: #007bff;
+  color: #fff !important;
+  text-decoration: none;
+}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+.navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #004080, #af7706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+  margin-right: 12px;
+  transition: transform 0.3s ease;
+  text-transform: uppercase;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+/* تنسيق عام لكلا الزرين */
+.adbtm {
+  height: 50px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 15%;
+    margin-left: 8px
+}
+
+
+.adbtm:first-of-type {
+  background-color: #343a40;
+  color: #ffffff;
+}
+.adbtm:first-of-type:hover {
+  background-color: #212529;
+  color: #ffc107;
+}
+
+/* الزر الثاني (اللغة) */
+.adbtm:last-of-type {
+  background-color: #007bff;
+  color: #ffffff;
+}
+.adbtm:last-of-type:hover {
+  background-color: #0056b3;
+  color: #ffffff;
+}

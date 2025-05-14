@@ -1,0 +1,86 @@
+/* Health Webinar Unique Styling */
+.healthwebinar-page-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f2f6fc, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.healthwebinar-form-card {
+  background: #fff;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+}
+
+.healthwebinar-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #6b21a8;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.healthwebinar-description {
+  font-size: 1.1rem;
+  text-align: center;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.healthwebinar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.healthwebinar-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.healthwebinar-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.healthwebinar-input:focus {
+  border-color: #0c27c0;
+  box-shadow: 0 0 5px rgba(12, 9, 204, 0.3);
+  outline: none;
+}
+
+.healthwebinar-submit-container {
+  text-align: center;
+}
+
+.healthwebinar-submit-btn {
+  background-color: #07235e;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.healthwebinar-submit-btn:hover {
+  background-color: #2135b6;
+  transform: scale(1.05);
+}
+
+.healthwebinar-success-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #16a34a;
+  font-weight: 600;
+}

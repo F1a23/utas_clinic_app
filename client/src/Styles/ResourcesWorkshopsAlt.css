@@ -1,0 +1,66 @@
+
+/* Resources & Workshops Alt Style */
+.rw-container {
+  background: linear-gradient(to right, #f9f9f9, #eef2f7);
+  padding: 60px 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.rw-header h2 {
+  font-size: 2.5rem;
+  color: #2a2e5c;
+  font-weight: 700;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.rw-header h2::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  background-color: #007bff;
+  margin: 10px auto 0;
+  border-radius: 5px;
+}
+
+.rw-header p {
+  color: #555;
+  font-size: 1.15rem;
+}
+
+.rw-content .rw-intro {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.rw-list {
+  list-style-type: none;
+  padding-left: 0;
+  font-size: 1.05rem;
+  color: #444;
+}
+
+.rw-list li {
+  margin-bottom: 12px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.rw-button {
+  background-color: #007bff;
+  border: none;
+  font-size: 1.05rem;
+  padding: 12px 28px;
+  border-radius: 8px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.rw-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}

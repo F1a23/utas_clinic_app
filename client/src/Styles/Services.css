@@ -1,0 +1,115 @@
+/* ✅ خلفية الصفحة */
+.clinic-services-wrapper {
+  background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
+  padding: 60px 20px;
+  min-height: 100vh;
+}
+
+/* ✅ رأس الصفحة */
+.clinic-services-header {
+  margin-bottom: 40px;
+  animation: fadeInDown 0.8s ease;
+}
+
+.clinic-services-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #004080;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.clinic-services-header h1::after {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background: #007bff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  border-radius: 4px;
+}
+
+.clinic-services-header p {
+  font-size: 1.1rem;
+  color: #333;
+  max-width: 800px;
+  margin: 20px auto 0;
+  line-height: 1.7;
+}
+
+/* ✅ عنوان الخدمات */
+.clinic-services-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #002b5c;
+}
+
+.clinic-services-subtitle {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* ✅ بطاقات الخدمة */
+.clinic-service-card {
+  border-radius: 18px;
+  transition: all 0.3s ease-in-out;
+  padding: 20px;
+  border: none;
+}
+
+.clinic-service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 64, 128, 0.15);
+}
+
+/* ✅ أيقونات */
+.clinic-service-icon {
+  color: #007bff;
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.clinic-service-card:hover .clinic-service-icon {
+  transform: scale(1.2);
+  color: #004080;
+}
+
+/* ✅ نص العنوان والنص داخل الكارد */
+.clinic-service-card .card-title {
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+.clinic-service-card .card-text {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ✅ زر "Read More" */
+.clinic-service-card .btn {
+  background-color: #007bff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: background 0.3s ease;
+}
+
+.clinic-service-card .btn:hover {
+  background-color: #0056b3;
+}
+.clinic-service-icon {
+  color: #007bff;
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  text-align: center;
+}

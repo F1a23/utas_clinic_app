@@ -1,0 +1,148 @@
+/* Background and layout */
+.medlist-wrapper {
+  background: linear-gradient(to right, #e0f7fa, #ffffff);
+  min-height: 100vh;
+  padding: 40px 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.medlist-container {
+  max-width: 1200px;
+  margin: auto;
+  background-color: #fdfdfd;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 0 30px rgba(33, 150, 243, 0.2);
+}
+
+/* Title */
+.medlist-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #01579b;
+  margin-bottom: 30px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Card styles */
+.medlist-card {
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.medlist-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);
+}
+
+.medlist-image {
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Delivery section */
+.delivery-section {
+  margin-top: 30px;
+  padding: 20px;
+  border: 2px dashed #b3e5fc;
+  border-radius: 16px;
+  background-color: #e1f5fe;
+}
+
+.delivery-section h5 {
+  color: #0277bd;
+  margin-bottom: 15px;
+}
+
+/* Inputs */
+.medlist-input {
+  border-radius: 12px;
+  border: 1px solid #90caf9;
+  padding: 10px 15px;
+  width: 100%;
+  transition: box-shadow 0.3s ease;
+  background-color: #ffffff;
+}
+
+.medlist-input:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.2);
+}
+
+/* Pickup section */
+.pickup-info {
+  background-color: #f1f8e9;
+  border-left: 6px solid #689f38;
+  padding: 20px;
+  border-radius: 12px;
+  font-style: italic;
+  color: #33691e;
+}
+
+/* Buttons */
+.btns-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.btn-bor1 {
+  background-color: transparent;
+  border: 2px solid #2196f3;
+  color: #2196f3;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 10px 25px;
+  transition: all 0.3s ease;
+}
+
+.btn-bor1:hover {
+  background-color: #e3f2fd;
+  transform: scale(1.05);
+}
+
+.btn-bor2 {
+  background-color: #2196f3;
+  color: white;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 10px 25px;
+  border: none;
+  box-shadow: 0 4px 14px rgba(33, 150, 243, 0.3);
+  animation: pulse 2s infinite;
+  transition: all 0.3s ease;
+}
+
+.btn-bor2:hover {
+  background-color: #1976d2;
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(33, 150, 243, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+  }
+}

@@ -1,0 +1,53 @@
+/* === Support Groups Page Styles === */
+.support-groups-container {
+  background-color: #fefeff;
+  padding: 60px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.support-groups-header h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #003366;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.support-groups-header h2::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  background-color: #007bff;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 6px;
+}
+
+.support-groups-header p {
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.support-groups-body p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.support-groups-btn {
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  background-color: #007bff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.support-groups-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}

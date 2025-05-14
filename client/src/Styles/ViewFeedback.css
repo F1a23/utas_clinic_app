@@ -1,0 +1,73 @@
+
+.feedback-page-container {
+    background: linear-gradient(to bottom right, #ffffff, #d6ecfe, #ffffff);
+    padding: 60px 30px;
+    border-radius: 12px;
+    padding: 100px;
+  }
+  
+  .feedback-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #003366;
+    position: relative;
+    margin-bottom: 40px;
+  }
+  
+  .feedback-title::after {
+    content: "";
+    width: 60px;
+    height: 4px;
+    background-color: #007bff;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+  }
+  
+  .feedback-card-wrapper {
+    padding: 10px;
+  }
+  
+  .feedback-card {
+    border-radius: 16px;
+    background: #f8f9fae0;
+    padding: 20px;
+    transition: all 0.3s ease;
+    transform: scale(0.93);
+    border: 2px solid transparent;
+  }
+  
+  .feedback-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(6, 29, 236, 0.922) !important;
+    background-color: #ebebec76;
+  }
+  
+  .feedback-card-title {
+    color: #003366;
+    font-weight: bold;
+  }
+  
+  .feedback-card-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  .feedback-delete-btn {
+    background-color: #dc3545 !important;
+    border-color: #c82333 !important;
+    color: white !important;
+    padding: 6px 16px;
+    border-radius: 8px;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  .feedback-delete-btn:hover {
+    background-color: #bd2130 !important;
+    transform: scale(1.05);
+  }
+  

@@ -1,0 +1,105 @@
+.announcement-container {
+  padding: 40px;
+  background: linear-gradient(to bottom right, #ffffff, #d6ecfe, #ffffff);
+  min-height: 100vh;
+  padding: 100px;
+}
+
+.announcement-card {
+  border-radius: 12px;
+  background-color: #ffffff;
+  transition: box-shadow 0.3s ease;
+  transform: scale(1);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.663) !important;
+}
+
+.announcement-card:hover {
+  box-shadow: 0 8px 24px rgba(6, 29, 236, 0.922) !important;
+}
+
+.announcement-title {
+  font-weight: bold;
+  font-size: 1.9rem;
+  color: #003366;
+  position: relative;
+}
+
+.announcement-divider {
+  border-top: 2px solid #007bff;
+  width: 60px;
+  margin: 0 auto 20px;
+}
+
+.announcement-form {
+  font-size: 1rem;
+}
+
+.announcement-label {
+  font-weight: 600;
+  color: #003366 !important;
+}
+
+.announcement-input {
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+background-color: #fdffe9;}
+
+.announcement-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+}
+
+.announcement-buttons {
+  margin-top: 20px;
+}
+
+.announcement-btn {
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  border-radius: 6px;
+}
+
+.announcement-btn:hover {
+  transform: scale(1.05);
+  background-color: #0056b3;
+}
+
+.announcement-view-btn {
+  transition: transform 0.2s ease;
+  border-radius: 6px;
+}
+
+.announcement-view-btn:hover {
+  transform: scale(1.05);
+}
+.announcement-submit-btn,
+.announcement-view-btn {
+  padding: 10px 30px !important;
+  font-size: 1.1rem !important;
+  border-radius: 8px !important;
+  min-width: 250px !important;
+  max-width: 260px !important;
+  display: inline-block !important;
+  text-align: center !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.announcement-submit-btn:hover,
+.announcement-view-btn:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.announcement-submit-btn {
+  background-color: #007bff !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.announcement-view-btn {
+  background-color: #28a745 !important;
+  color: #fff !important;
+  border: none !important;
+  text-decoration: none !important;
+}

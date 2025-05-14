@@ -1,0 +1,53 @@
+/* === Emotional Support Page Styles === */
+.emotional-support-container {
+  background-color: #f5faff;
+  padding: 60px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.emotional-support-header h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #003366;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.emotional-support-header h2::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  background-color: #007bff;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 6px;
+}
+
+.emotional-support-header p {
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.emotional-support-body p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.emotional-support-btn {
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  background-color: #007bff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.emotional-support-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}

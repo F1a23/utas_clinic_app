@@ -1,0 +1,49 @@
+
+.clinic-extras-container {
+  min-height: 100vh;
+  background-color: #f7f9fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.clinic-extras-card {
+  background-color: #ffffff;
+  max-width: 700px;
+  width: 100%;
+  border-radius: 18px;
+  padding: 35px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.clinic-extras-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.clinic-extras-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.text-blue {
+  color: #007bff;
+}
+
+.text-green {
+  color: #28a745;
+}
+
+.text-red {
+  color: #dc3545;
+}
+
+.clinic-extras-description {
+  font-size: 1.1rem;
+  text-align: center;
+  color: #333333;
+}

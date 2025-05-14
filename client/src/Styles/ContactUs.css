@@ -1,0 +1,538 @@
+
+
+.cu-container {
+  background: linear-gradient(to bottom right, #ffffff00, #d6ecfe, #ffffff00);
+  padding: 40px 20px;
+  border-radius: 12px;
+  padding:0px 100px;
+
+}
+
+.cu-header {
+  text-align: center;
+  background-color: #ffffff00;
+  padding: 30px 20px;
+
+  margin-bottom: 30px;
+  animation: fadeInDown 0.8s ease;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cu-header:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 64, 128, 0.3);
+}
+
+.cu-header h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #002b5c;
+  margin-bottom: 10px;
+}
+
+.cu-header p {
+  color: #555;
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.row.equal-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row.equal-height > [class^="col"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.cu-form-section,
+.cu-messages-sidebar,
+.cu-clinic-info {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cu-form-section:hover,
+.cu-messages-sidebar:hover,
+.cu-clinic-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 64, 128, 0.2);
+}
+
+.cu-form-section {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 64, 128, 0.15);
+  height: 100%;
+  flex: 1;
+}
+
+.cu-form-section h2 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #003366;
+  margin-bottom: 20px;
+}
+
+.cu-form-section .form-group label {
+  font-weight: 500;
+  color: #333;
+}
+
+.cu-form-section .form-control {
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 0.95rem;
+}
+
+.cu-submit-button {
+  width: 100%;
+  font-weight: bold;
+  background: linear-gradient(90deg, #004080, #0073e6);
+  border: none;
+  transition: 0.3s;
+  padding: 10px 20px;
+  border-radius: 12px;
+}
+
+.cu-submit-button:hover {
+  background: linear-gradient(90deg, #003366, #005ecb);
+  transform: scale(1.03);
+}
+
+.cu-messages-sidebar {
+  background: #f9fbfe;
+  padding: 25px;
+  border-radius: 20px;
+ 
+
+  max-height: 600px; /* ← أو أي ارتفاع يناسب التصميم */
+  overflow-y: auto; /* ← يسمح بالتمرير */
+  scroll-behavior: smooth;
+
+
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  box-shadow: 0 0 10px rgba(0, 64, 128, 0.1);
+ 
+
+}
+
+.cu-message-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.cu-bubble-left,
+.cu-bubble-right {
+  max-width: 90%;
+  padding: 18px 24px;
+  border-radius: 20px;
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  word-wrap: break-word;
+}
+
+.cu-bubble-left {
+  align-self: flex-start;
+  background-color: #e1f0ff;
+  border-top-left-radius: 0;
+}
+
+.cu-bubble-right {
+  align-self: flex-end;
+  background-color: #d1ffd6;
+  border-top-right-radius: 0;
+}
+
+.cu-bubble-time {
+  font-size: 0.75rem;
+  color: #777;
+  margin-top: 5px;
+  text-align: right;
+}
+
+.cu-clinic-info {
+  text-align: center;
+  background-color: #e6f0ff;
+  padding: 40px 20px;
+  border-radius: 15px;
+  margin-top: 60px;
+  box-shadow: 0 4px 12px rgba(0, 64, 128, 0.15);
+}
+
+.cu-clinic-info h3 {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #003366;
+}
+
+.cu-map-container {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+
+
+
+
+/* Animation for header */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .cu-bubble-left,
+  .cu-bubble-right {
+    max-width: 100%;
+  }
+
+  .cu-form-section,
+  .cu-messages-sidebar {
+    padding: 20px;
+  }
+
+  .cu-header h1 {
+    font-size: 2rem;
+  }
+
+  .cu-header p {
+    font-size: 1rem;
+  }
+
+  .cu-clinic-info h3 {
+    font-size: 1.4rem;
+  }
+
+  .row.equal-height {
+    display: block;
+  }
+}
+
+
+
+
+.cu-header {
+  text-align: center;
+
+  padding: 40px 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+ 
+  margin-bottom: 30px;
+  animation: fadeInDown 0.8s ease;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+
+.cu-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #004080;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.cu-header p {
+  color: #333;
+  font-size: 1.25rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.75;
+  font-weight: 400;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.6);
+}
+
+.row.equal-height {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.row.equal-height > [class^="col"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.cu-form-section,
+.cu-messages-sidebar,
+.cu-clinic-info {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cu-form-section:hover,
+.cu-messages-sidebar:hover,
+.cu-clinic-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgb(0, 26, 128);
+}
+
+.cu-form-section {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 64, 128, 0.15);
+  height: 100%;
+
+  flex: 1;
+  animation: fadeIn 0.9s ease-in-out;
+}
+
+.cu-form-section h2 {
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #002b5c;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.cu-form-section h2::after {
+  content: "";
+  width: 50px;
+  height: 4px;
+  background-color: #0073e6;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  border-radius: 4px;
+}
+
+.cu-form-section .form-group {
+  margin-bottom: 25px;
+}
+
+.cu-form-section .form-group label {
+  font-weight: 600;
+  color: #004080;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.cu-form-section .form-control {
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid #cce0f5;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.cu-form-section .form-control:focus {
+  border-color: #0073e6;
+  box-shadow: 0 0 0 3px rgba(0,115,230,0.1);
+  outline: none;
+}
+
+.cu-submit-button {
+  width: 100%;
+  font-weight: bold;
+  background: linear-gradient(90deg, #004080, #0073e6);
+  border: none;
+  transition: 0.3s;
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 14px;
+  color: white;
+}
+
+.cu-submit-button:hover {
+  background: linear-gradient(90deg, #003366, #005ecb);
+  transform: scale(1.03);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cu-form-section:hover,
+.cu-messages-sidebar:hover,
+.cu-clinic-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgb(0, 26, 128);
+}
+
+.cu-form-section {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  border-left: 30px solid #0073e6;
+  box-shadow: 0 4px 16px rgba(0, 64, 128, 0.15);
+
+  flex: 1;
+  animation: fadeIn 0.9s ease-in-out;
+  position: relative;
+}
+
+.cu-form-section h2 {
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #002b5c;
+  margin-bottom: 30px;
+  position: relative;
+  border-left: 4px solid #004080;
+  padding-left: 12px;
+}
+
+.cu-form-section h2::after {
+  content: "";
+  width: 50px;
+  height: 4px;
+  background-color: #0073e6;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  border-radius: 4px;
+}
+
+.cu-form-section .form-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.cu-form-section .form-group label {
+  font-weight: 600;
+  color: #004080;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.cu-form-section .form-control {
+  border-radius: 12px;
+  padding: 12px 16px 12px 40px;
+  font-size: 1rem;
+  border: 1px solid #cce0f5;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 20px;
+}
+
+.cu-form-section .form-control:focus {
+  border-color: #0073e6;
+  box-shadow: 0 0 0 3px rgba(0,115,230,0.1);
+  outline: none;
+}
+
+
+#name {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23004080' viewBox='0 0 24 24'%3E%3Cpath d='M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z'/%3E%3C/svg%3E");
+}
+
+#email {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23004080' viewBox='0 0 24 24'%3E%3Cpath d='M12 13l8-5v10H4V8l8 5zm0-2L4 6h16l-8 5z'/%3E%3C/svg%3E");
+}
+
+#message {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23004080' viewBox='0 0 24 24'%3E%3Cpath d='M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z'/%3E%3C/svg%3E");
+  background-position: 10px 15px;
+}
+
+.cu-submit-button {
+  width: 100%;
+  font-weight: bold;
+  background: linear-gradient(90deg, #004080, #0073e6);
+  border: none;
+  transition: 0.3s;
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 14px;
+  color: white;
+}
+
+.cu-submit-button:hover {
+  background: linear-gradient(90deg, #003366, #005ecb);
+  transform: scale(1.03);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+/* تنسيق القسم السفلي (معلومات العيادة والخريطة) */
+.cu-clinic-info {
+  background: #eaf4ff;
+  padding: 40px 20px;
+  border-radius: 20px;
+  margin-top: 60px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 64, 128, 0.1);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.cu-clinic-info h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.cu-clinic-info p {
+  font-size: 1.05rem;
+  color: #333;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+.cu-clinic-info p:nth-of-type(1)::before {
+  content: "📍 ";
+  margin-right: 6px;
+}
+
+.cu-clinic-info p:nth-of-type(2)::before {
+  content: "📞 ";
+  margin-right: 6px;
+}
+
+.cu-clinic-info p:nth-of-type(3)::before {
+  content: "✉️ ";
+  margin-right: 6px;
+}
+
+.cu-clinic-info h3::before {
+  content: "🏥 ";
+  margin-right: 8px;
+}
+
+

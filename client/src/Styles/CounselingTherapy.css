@@ -1,0 +1,67 @@
+.ct-page-wrapper {
+  background: #f5faff;
+  padding: 60px 20px;
+  border-radius: 12px;
+}
+
+.ct-title {
+  color: #003366;
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-decoration: underline;
+}
+
+.ct-subtitle {
+  max-width: 750px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+.ct-section-box {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+}
+
+.ct-section-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.ct-section-title {
+  color: #0056b3;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.ct-form-title {
+  color: #004080;
+  font-size: 1.6rem;
+}
+
+.ct-input {
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 10px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+.ct-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+}
+
+.ct-label {
+  font-weight: 500;
+  color: #333;
+}
+
+.ct-submit-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+}

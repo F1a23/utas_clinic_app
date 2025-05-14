@@ -1,0 +1,63 @@
+/* يمكنك إضافة هذه الأنماط إلى ملف CSS الخاص بك */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* الخلفية نصف شفافة */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.custom-modal-box {
+  background-color: #fff;
+  padding: 40px; /* تم تكبير البادينغ */
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  max-width: 520px; /* تم تكبير العرض */
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease-out;
+}
+
+.custom-modal-box h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.custom-modal-box p {
+  margin-top: 10px;
+  color: #666;
+}
+
+.custom-button-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.custom-continue-button {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.custom-logout-button {
+  background-color: #ef4444;
+  color: white;
+}
