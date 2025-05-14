@@ -21,24 +21,21 @@ import WebinarRegistrationModel from "./Models/WebinarRegistrationModel.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
-
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ تحديث إعدادات CORS لدعم أكثر من origin
-const allowedOrigins = process.env.CLIENT_URL?.split(",") || [];
+// ✅ إعداد CORS
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://utas-clinic-app-c.onrender.com",
+];
 
-// ✅ إعداد CORS بشكل مضمون
 app.use(
   cors({
     origin: function (origin, callback) {
-      const allowedOrigins = [
-        "http://localhost:3000",
-        "https://utas-clinic-app-c.onrender.com",
-      ];
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -49,23 +46,16 @@ app.use(
   })
 );
 
-// ✅ تعديل الاتصال بقاعدة البيانات (حذف الإعدادات القديمة)
-const connectString = `mongodb+srv://${ENV.DB_USER}:${ENV.DB_PASSWORD}@${ENV.DB_CLUSTER}/${ENV.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
+// ✅ الاتصال بـ MongoDB
+const connectString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose
   .connect(connectString)
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
+  .then(() => console.log("Connected to MongoDB"))
   .catch((err) => {
     console.log("MongoDB connection error:", err);
     process.exit(1);
   });
-
-// ✅ إضافة اختبار بسيط لتأكيد أن السيرفر شغال
-app.get("/", (req, res) => {
-  res.send("Server is running...");
-});
 
 //------USERS-------
 
@@ -1450,16 +1440,15 @@ app.get("/getAllMedicationRequests", async (req, res) => {
 //---------------------------------------------------------------
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const clientPath = path.join(__dirname, "../client/build");
 
+const clientPath = path.join(__dirname, "../client/build");
 app.use(express.static(clientPath));
 
-// ✅ هنا السطر المهم
 app.get("*", (req, res) => {
   res.sendFile(path.join(clientPath, "index.html"));
 });
 
-// 7. تشغيل السيرفر
+// ✅ تشغيل السيرفر
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`You are connected at port: ${port}`);
