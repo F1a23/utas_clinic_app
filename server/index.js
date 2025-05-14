@@ -26,9 +26,14 @@ app.use(express.urlencoded({ extended: true }));
 // ✅ تحديث إعدادات CORS لدعم أكثر من origin
 const allowedOrigins = process.env.CLIENT_URL?.split(",") || [];
 
+// ✅ إعداد CORS بشكل مضمون
 app.use(
   cors({
     origin: function (origin, callback) {
+      const allowedOrigins = [
+        "http://localhost:3000",
+        "https://utas-clinic-app-c.onrender.com"
+      ];
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
