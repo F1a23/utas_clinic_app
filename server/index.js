@@ -17,19 +17,18 @@ import fs from "fs";
 import AnnouncementModel from "./Models/AnnouncementModel.js";
 import PrescriptionModel from "./Models/PrescriptionModel.js";
 import ContactMode from "./Models/ContactMode.js";
-
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// إعداد CORS يدعم عدة origins من CLIENT_URL
-const allowedOrigins = process.env.CLIENT_URL.split(",");
+// ✅ تحديث إعدادات CORS لدعم أكثر من origin
+const allowedOrigins = process.env.CLIENT_URL?.split(",") || [];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // إذا لم يوجد origin (في حالة curl مثلًا) أو موجود في القائمة
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -39,14 +38,12 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.urlencoded({ extended: true }));
-// Database connection
+
+// ✅ تعديل الاتصال بقاعدة البيانات (حذف الإعدادات القديمة)
 const connectString = `mongodb+srv://${ENV.DB_USER}:${ENV.DB_PASSWORD}@${ENV.DB_CLUSTER}/${ENV.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
+
 mongoose
-  .connect(connectString, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(connectString)
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -54,6 +51,11 @@ mongoose
     console.log("MongoDB connection error:", err);
     process.exit(1);
   });
+
+// ✅ إضافة اختبار بسيط لتأكيد أن السيرفر شغال
+app.get("/", (req, res) => {
+  res.send("Server is running...");
+});
 
 //------USERS-------
 
@@ -140,19 +142,29 @@ app.post("/registerUser", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await UserModel.findOne({ email });
-  if (!user) {
-    return res.status(404).json({ error: "User not found" });
+  try {
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // ✅ تحقق من كلمة السر المدخلة مقابل المشفرة في قاعدة البيانات
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid password" });
+    }
+
+    // ✅ إذا كانت صحيحة، أرجع بيانات المستخدم
+    res.json({
+      name: user.name,
+      email: user.email,
+      contactNo: user.contactNo,
+      userType: user.userType,
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
-
-  // ملاحظة: هنا يفترض أنك تتحقق من كلمة المرور باستخدام bcrypt، نتجاهلها مؤقتًا
-
-  res.json({
-    name: user.name,
-    email: user.email,
-    contactNo: user.contactNo, // ✅ تأكد من إرساله هنا
-    userType: user.userType,
-  });
 });
 
 // POST API - Logout
