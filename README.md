@@ -1,1 +1,0 @@
-# CLINIC_APP
