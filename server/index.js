@@ -22,7 +22,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://utas-clinic-app-client.onrender.com", // اسم موقع الواجهة
+    origin: "https://utas-clinic-app-c.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
