@@ -17,6 +17,8 @@ import fs from "fs";
 import AnnouncementModel from "./Models/AnnouncementModel.js";
 import PrescriptionModel from "./Models/PrescriptionModel.js";
 import ContactMode from "./Models/ContactMode.js";
+import WebinarRegistrationModel from "./Models/WebinarRegistrationModel.js";
+
 import path from "path";
 import { fileURLToPath } from "url";
 
