@@ -1444,10 +1444,6 @@ const __dirname = path.dirname(__filename);
 const clientPath = path.join(__dirname, "../client/build");
 app.use(express.static(clientPath));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(clientPath, "index.html"));
-});
-
 // ✅ تشغيل السيرفر
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
