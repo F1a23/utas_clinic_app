@@ -11,7 +11,7 @@ const SessionTimeout = () => {
   const warningTimeout = useRef(null);
   const logoutTimeout = useRef(null);
 
-  const warningTime = 60 * 60 * 1000; // 1 دقيقة
+  const warningTime = 1 * 60 * 1000; // 1 دقيقة
   const logoutDelay = 30 * 1000; // بعد 30 ثانية
 
   const resetTimer = () => {
