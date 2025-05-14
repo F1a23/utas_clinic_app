@@ -1,7 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import path from "path";
-import { fileURLToPath } from "url";
 import cors from "cors";
 import bcrypt from "bcrypt";
 import UserModel from "./Models/UserModel.js";
@@ -1426,21 +1424,6 @@ app.get("/getAllMedicationRequests", async (req, res) => {
 
 //---------------------------------------------------------------
 // Start server
-//---------------------------------------------------------------
-
-// دعم __dirname في ES Module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// ✅ نشر ملفات React فقط في بيئة الإنتاج
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client", "build")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-  });
-}
-
 const port = ENV.PORT || 3001;
 app.listen(port, () => {
   console.log(`You are connected at port: ${port}`);
