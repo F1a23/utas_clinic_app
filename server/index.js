@@ -31,40 +31,39 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 // Database connection
+// Database connection
 const connectString = `mongodb+srv://${ENV.DB_USER}:${ENV.DB_PASSWORD}@${ENV.DB_CLUSTER}/${ENV.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
+
 mongoose
   .connect(connectString)
-  .then(() => console.log("✅ Connected to MongoDB"))
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
   .catch((err) => {
-    console.error("❌ MongoDB connection error:", err);
+    console.log("MongoDB connection error:", err);
     process.exit(1);
   });
 
-// ✅ تحديد __dirname بالطريقة الحديثة
+// Serve static files from the 'uploads' directory
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ ملفات ثابتة: تحميل الصور والملفات
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// Set up middleware to serve static files from the 'uploads' directory
+// Requests to '/uploads' will serve files from the local 'uploads' folder
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
-// ✅ إعداد multer لحفظ الملفات المرفوعة
+// Set up multer for file storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, "uploads/"); // Specify the directory to save uploaded files
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
+    cb(null, Date.now() + "-" + file.originalname); // Unique filename
   },
 });
-const upload = multer({ storage });
-
-// ✅ نشر ملفات React في الإنتاج فقط
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "..", "client", "build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
-  });
-}
+// Create multer instance
+const upload = multer({ storage: storage });
 //------USERS-------
 
 // POST API - Register User
