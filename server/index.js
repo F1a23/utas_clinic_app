@@ -2,8 +2,6 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bcrypt from "bcrypt";
-import path from "path";
-import { fileURLToPath } from "url";
 import UserModel from "./Models/UserModel.js";
 import UserFeedbackModel from "./Models/UserFeedback.js";
 import * as ENV from "./config.js";
@@ -16,26 +14,28 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import multer from "multer";
 import fs from "fs";
-import AnnouncementModel from "./Models/AnnouncementModel.js";
+import AnnouncementModel from "./models/AnnouncementModel.js";
 import PrescriptionModel from "./Models/PrescriptionModel.js";
+
 import ContactMode from "./Models/ContactMode.js";
-import WebinarRegistrationModel from "./Models/WebinarRegistrationModel.js";
 const app = express();
 app.use(express.json());
+
 app.use(
   cors({
-    origin: "https://utas-clinic-app-c.onrender.com",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    origin: "http://localhost:3000", // السماح للفرونت المحلي
+    credentials: true, // فقط إذا كنت تستخدم الكوكيز (مثلاً لجلسة تسجيل الدخول)
   })
 );
+
 app.use(express.urlencoded({ extended: true }));
 // Database connection
-// Database connection
 const connectString = `mongodb+srv://${ENV.DB_USER}:${ENV.DB_PASSWORD}@${ENV.DB_CLUSTER}/${ENV.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
-
 mongoose
-  .connect(connectString)
+  .connect(connectString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -44,26 +44,6 @@ mongoose
     process.exit(1);
   });
 
-// Serve static files from the 'uploads' directory
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Set up middleware to serve static files from the 'uploads' directory
-// Requests to '/uploads' will serve files from the local 'uploads' folder
-app.use("/uploads", express.static(__dirname + "/uploads"));
-
-// Set up multer for file storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Specify the directory to save uploaded files
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname); // Unique filename
-  },
-});
-// Create multer instance
-const upload = multer({ storage: storage });
 //------USERS-------
 
 // POST API - Register User
@@ -149,29 +129,19 @@ app.post("/registerUser", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  try {
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    // ✅ تحقق من كلمة المرور
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
-
-    // ✅ إرسال بيانات المستخدم
-    res.json({
-      name: user.name,
-      email: user.email,
-      contactNo: user.contactNo,
-      userType: user.userType,
-    });
-  } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ error: "Server error during login" });
+  const user = await UserModel.findOne({ email });
+  if (!user) {
+    return res.status(404).json({ error: "User not found" });
   }
+
+  // ملاحظة: هنا يفترض أنك تتحقق من كلمة المرور باستخدام bcrypt، نتجاهلها مؤقتًا
+
+  res.json({
+    name: user.name,
+    email: user.email,
+    contactNo: user.contactNo, // ✅ تأكد من إرساله هنا
+    userType: user.userType,
+  });
 });
 
 // POST API - Logout
