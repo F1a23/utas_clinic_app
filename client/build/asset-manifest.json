@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "./static/css/main.494d7d1e.css",
+    "main.js": "./static/js/main.5d4757f3.js",
+    "static/media/fd.png": "./static/media/fd.7e694c64c7d93776b408.png",
+    "static/media/nurse1.png": "./static/media/nurse1.cc7ffc23e4113f315af1.png",
+    "static/media/app.png": "./static/media/app.5e2f0cfcde6e702a7d8e.png",
+    "static/media/mdc.png": "./static/media/mdc.66a07176d0aab1851610.png",
+    "static/media/Health Resource 1.jpeg": "./static/media/Health Resource 1.374e28d8ea7857b8ae34.jpeg",
+    "static/media/Health Resource 2.jpeg": "./static/media/Health Resource 2.f9e49241b348c9ae5619.jpeg",
+    "static/media/Health Resource 3.jpeg": "./static/media/Health Resource 3.c7570fe3f773697b4d2e.jpeg",
+    "static/media/mang.png": "./static/media/mang.a188d6f827c42303ad7f.png",
+    "static/media/login6.png": "./static/media/login6.1f3ecaef99c795128732.png",
+    "static/media/logo.png": "./static/media/logo.02e98bd810de85c9df0a.png",
+    "static/media/hom.jpg": "./static/media/hom.53ec7f7e1fb3c87d9ca0.jpg",
+    "static/media/des.png": "./static/media/des.ec72bfc1aa52f4df5adb.png",
+    "static/media/team.png": "./static/media/team.b5335da7647b04524e83.png",
+    "static/media/slick.svg": "./static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "./static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "./static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "./static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "./index.html",
+    "main.494d7d1e.css.map": "./static/css/main.494d7d1e.css.map",
+    "main.5d4757f3.js.map": "./static/js/main.5d4757f3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.494d7d1e.css",
+    "static/js/main.5d4757f3.js"
+  ]
+}

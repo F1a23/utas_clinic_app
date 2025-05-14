@@ -17,6 +17,9 @@ import fs from "fs";
 import AnnouncementModel from "./Models/AnnouncementModel.js";
 import PrescriptionModel from "./Models/PrescriptionModel.js";
 import ContactMode from "./Models/ContactMode.js";
+import path from "path";
+import { fileURLToPath } from "url";
+
 dotenv.config();
 
 const app = express();
@@ -32,7 +35,7 @@ app.use(
     origin: function (origin, callback) {
       const allowedOrigins = [
         "http://localhost:3000",
-        "https://utas-clinic-app-c.onrender.com"
+        "https://utas-clinic-app-c.onrender.com",
       ];
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
@@ -1443,7 +1446,17 @@ app.get("/getAllMedicationRequests", async (req, res) => {
 });
 
 //---------------------------------------------------------------
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+// Serve React static files
+const clientPath = path.join(__dirname, "../client/build");
+app.use(express.static(clientPath));
+
+// For any route not found, send back React index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(clientPath, "index.html"));
+});
 // Start server
 const port = ENV.PORT || 3001;
 app.listen(port, () => {
