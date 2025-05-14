@@ -121,19 +121,29 @@ app.post("/registerUser", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await UserModel.findOne({ email });
-  if (!user) {
-    return res.status(404).json({ error: "User not found" });
+  try {
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // ✅ تحقق من كلمة المرور
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    // ✅ إرسال بيانات المستخدم
+    res.json({
+      name: user.name,
+      email: user.email,
+      contactNo: user.contactNo,
+      userType: user.userType,
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ error: "Server error during login" });
   }
-
-  // ملاحظة: هنا يفترض أنك تتحقق من كلمة المرور باستخدام bcrypt، نتجاهلها مؤقتًا
-
-  res.json({
-    name: user.name,
-    email: user.email,
-    contactNo: user.contactNo, // ✅ تأكد من إرساله هنا
-    userType: user.userType,
-  });
 });
 
 // POST API - Logout
