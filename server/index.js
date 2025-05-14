@@ -1,5 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from "url";
 import cors from "cors";
 import bcrypt from "bcrypt";
 import UserModel from "./Models/UserModel.js";
@@ -1425,8 +1427,6 @@ app.get("/getAllMedicationRequests", async (req, res) => {
 //---------------------------------------------------------------
 // Start server
 //---------------------------------------------------------------
-import path from "path";
-import { fileURLToPath } from "url";
 
 // دعم __dirname في ES Module
 const __filename = fileURLToPath(import.meta.url);
