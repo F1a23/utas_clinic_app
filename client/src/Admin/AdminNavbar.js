@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FaSun, FaMoon, FaUserCircle } from "react-icons/fa";
+import { FaSun, FaMoon } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "../Styles/styles.css";
