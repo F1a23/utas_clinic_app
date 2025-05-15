@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Container, Row, Col, Button } from "reactstrap";
+import { useNavigate } from "react-router-dom"; // ✅
 import { FaCalendarAlt, FaCapsules, FaCommentDots } from "react-icons/fa";
 import "../Styles/NurseDashboard.css";
 import nurseImage from "../component/images/nurse1.png";
@@ -31,6 +32,8 @@ const cards = [
 
 const NurseDashboard = () => {
   const { user } = useSelector((state) => state.users);
+  const navigate = useNavigate(); // ✅
+
   return (
     <div className="nurse-dashboard main-layout">
       <img
@@ -82,7 +85,7 @@ const NurseDashboard = () => {
                   </div>
                   <div className="flip-card-back">
                     <p>{card.details}</p>
-                    <Button href={card.link} color="primary">
+                    <Button color="primary" onClick={() => navigate(card.link)}>
                       Go
                     </Button>
                   </div>
