@@ -39,7 +39,7 @@ mongoose.connect(connectString, {
 const __filename = fileURLToPath(import.meta.url);
 
 // Get the directory name from the current file path
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 // Set up middleware to serve static files from the 'uploads' directory
 // Requests to '/uploads' will serve files from the local 'uploads' folder
