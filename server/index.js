@@ -1442,7 +1442,7 @@ app.get("/getAllMedicationRequests", async (req, res) => {
 // هذا الـ catch-all route لحل مشكلة التحديث
 app.use(express.static(path.join(__dirname, "client", "build")));
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
 
 const port = ENV.PORT || 3001;
