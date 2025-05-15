@@ -21,25 +21,41 @@ import WebinarRegistrationModel from "./Models/WebinarRegistrationModel.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
-dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-const PORT = process.env.PORT || 3001;
-// ✅ إعداد CORS
 app.use(cors());
 
 // ✅ الاتصال بـ MongoDB
 const connectString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
+mongoose.connect(connectString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-mongoose
-  .connect(connectString)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => {
-    console.log("MongoDB connection error:", err);
-    process.exit(1);
-  });
+// Serve static files from the 'uploads' directory
+
+// Convert the URL of the current module to a file path
+const __filename = fileURLToPath(import.meta.url);
+
+// Get the directory name from the current file path
+const __dirname = dirname(__filename);
+
+// Set up middleware to serve static files from the 'uploads' directory
+// Requests to '/uploads' will serve files from the local 'uploads' folder
+app.use("/uploads", express.static(__dirname + "/uploads"));
+
+// Set up multer for file storage
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Specify the directory to save uploaded files
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname); // Unique filename
+  },
+});
+// Create multer instance
+const upload = multer({ storage: storage });
 
 //------USERS-------
 
@@ -1422,16 +1438,9 @@ app.get("/getAllMedicationRequests", async (req, res) => {
 });
 
 //---------------------------------------------------------------
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "client", "build")));
+const port = ENV.PORT || 3001;
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
-// ✅ تشغيل السيرفر
-const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`You are connected at port: ${port}`);
 });
