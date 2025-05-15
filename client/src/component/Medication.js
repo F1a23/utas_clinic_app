@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import {
   Container,
@@ -28,8 +27,7 @@ const Medication = () => {
   const [medications, setMedications] = useState([]);
   const [selected, setSelected] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
-const [sortOrder, setSortOrder] = useState("az");
-
+  const [sortOrder, setSortOrder] = useState("az");
 
   useEffect(() => {
     if (!user || !user.email) {
@@ -43,32 +41,22 @@ const [sortOrder, setSortOrder] = useState("az");
         const meds = res.data.medicines;
         setMedications(meds);
 
-        const previous = sessionStorage.getItem("lastPage");
-        const current = location.pathname;
-        const isRefresh =
-          performance.navigation.type === 1 ||
-          performance.getEntriesByType("navigation")[0]?.type === "reload";
-
-        if (previous === "/order" || isRefresh) {
-          const saved = localStorage.getItem("selectedMeds");
-          if (saved) {
-            const parsed = JSON.parse(saved);
-            const validIds = meds.map((m) => m._id);
-            const filtered = {};
-            for (const id in parsed) {
-              if (validIds.includes(id)) {
-                filtered[id] = 1;
-              }
+        const saved = localStorage.getItem("selectedMeds");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          const validIds = meds.map((m) => m._id);
+          const filtered = {};
+          for (const id in parsed) {
+            if (validIds.includes(id)) {
+              filtered[id] = 1;
             }
-            setSelected(filtered);
           }
-        } else {
-          localStorage.removeItem("selectedMeds");
+          setSelected(filtered);
         }
 
-        sessionStorage.setItem("lastPage", current);
+        sessionStorage.setItem("lastPage", location.pathname);
       } catch {
-        toast.error("❌ Failed to load medications.", {
+        toast.error("\u274C Failed to load medications.", {
           className: "custom-toast",
           bodyClassName: "custom-toast-body",
         });
@@ -77,6 +65,10 @@ const [sortOrder, setSortOrder] = useState("az");
 
     fetchAndRestore();
   }, [location]);
+
+  useEffect(() => {
+    localStorage.setItem("selectedMeds", JSON.stringify(selected));
+  }, [selected]);
 
   const handleCheckboxChange = (id) => {
     setSelected((prev) => {
@@ -93,7 +85,7 @@ const [sortOrder, setSortOrder] = useState("az");
   const handleSubmit = async () => {
     const selectedIds = Object.keys(selected);
     if (selectedIds.length === 0) {
-      toast.error("❌ Please select at least one medication.", {
+      toast.error("\u274C Please select at least one medication.", {
         className: "custom-toast",
         bodyClassName: "custom-toast-body",
       });
@@ -107,7 +99,7 @@ const [sortOrder, setSortOrder] = useState("az");
       });
 
       if (!res.data.allowed) {
-        toast.error(`🚫 ${res.data.message}`, {
+        toast.error(`\uD83D\uDEAB ${res.data.message}`, {
           className: "custom-toast",
           bodyClassName: "custom-toast-body",
           autoClose: 5000,
@@ -115,7 +107,6 @@ const [sortOrder, setSortOrder] = useState("az");
         return;
       }
 
-      localStorage.setItem("selectedMeds", JSON.stringify(selected));
       navigate("/order", {
         state: {
           selectedMedications: selectedIds,
@@ -123,7 +114,7 @@ const [sortOrder, setSortOrder] = useState("az");
         },
       });
     } catch (error) {
-      toast.error("❌ Could not validate your request. Please try again.", {
+      toast.error("\u274C Could not validate your request. Please try again.", {
         className: "custom-toast",
         bodyClassName: "custom-toast-body",
       });
@@ -132,116 +123,117 @@ const [sortOrder, setSortOrder] = useState("az");
 
   const handleClearSelection = () => {
     if (Object.keys(selected).length === 0) {
-      toast.info("ℹ️ No medications to clear.");
+      toast.info("\u2139\uFE0F No medications to clear.");
       return;
     }
 
     setSelected({});
     localStorage.removeItem("selectedMeds");
 
-    toast.success("🗑️ All selected medications have been cleared.", {
-      className: "custom-toast",
-      bodyClassName: "custom-toast-body",
-    });
+    toast.success(
+      "\uD83D\uDDD1\uFE0F All selected medications have been cleared.",
+      {
+        className: "custom-toast",
+        bodyClassName: "custom-toast-body",
+      }
+    );
   };
-  const filteredAndSorted = medications
-  .filter((med) => med.name.toLowerCase().includes(searchTerm.toLowerCase()))
-  .sort((a, b) => {
-    if (sortOrder === "az") return a.name.localeCompare(b.name);
-    if (sortOrder === "za") return b.name.localeCompare(a.name);
-    if (sortOrder === "stock") return b.quantity - a.quantity;
-    return 0;
-  });
 
+  const filteredAndSorted = medications
+    .filter((med) => med.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    .sort((a, b) => {
+      if (sortOrder === "az") return a.name.localeCompare(b.name);
+      if (sortOrder === "za") return b.name.localeCompare(a.name);
+      if (sortOrder === "stock") return b.quantity - a.quantity;
+      return 0;
+    });
 
   return (
     <div className="medicine-full-wrapper">
-<ToastContainer position="top-center" autoClose={3000} />
-<div className="med-cart-header d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-  <div className="d-flex align-items-center gap-3">
-    <div className="med-cart-icon-wrapper position-relative">
-      <FaShoppingCart size={28} className="med-cart-icon" />
-      {Object.keys(selected).length > 0 && (
-        <span className="med-cart-badge pulse">
-          {Object.keys(selected).length}
-        </span>
-      )}
-    </div>
-    <FaTrashAlt
-      size={24}
-      className="med-trash-icon"
-      title="Clear Selection"
-      onClick={handleClearSelection}
-    />
-  </div>
-
-  <div className="d-flex gap-3 align-items-center flex-wrap">
-    <Input
-      type="text"
-      placeholder="🔍 Search by name..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="med-search-input"
-    />
-    <Input
-      type="select"
-      value={sortOrder}
-      onChange={(e) => setSortOrder(e.target.value)}
-      className="med-sort-select"
-    >
-      <option value="az">Sort: A → Z</option>
-      <option value="za">Sort: Z → A</option>
-      <option value="stock">Sort by Stock</option>
-    </Input>
-  </div>
-</div>
-
-
-
-<h2 className="medicine-title animated-underline">Request Your Medication</h2>
-      <Row>
-      {filteredAndSorted.map((med) => (
-  <Col md={4} key={med._id} className="mb-4">
-    <Card className="medicine-card">
-      <CardImg
-        top
-        src={med.image}
-        alt={med.name}
-        className="medicine-image"
-      />
-      <CardBody>
-        <div className="d-flex align-items-center">
-          <Input
-            type="checkbox"
-            checked={!!selected[med._id]}
-            onChange={() => handleCheckboxChange(med._id)}
-            disabled={med.quantity === 0}
-            style={{ marginRight: "10px" }}
+      <ToastContainer position="top-center" autoClose={3000} />
+      <div className="med-cart-header d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div className="d-flex align-items-center gap-3">
+          <div className="med-cart-icon-wrapper position-relative">
+            <FaShoppingCart size={28} className="med-cart-icon" />
+            {Object.keys(selected).length > 0 && (
+              <span className="med-cart-badge pulse">
+                {Object.keys(selected).length}
+              </span>
+            )}
+          </div>
+          <FaTrashAlt
+            size={24}
+            className="med-trash-icon"
+            title="Clear Selection"
+            onClick={handleClearSelection}
           />
-          <CardTitle tag="h5" className="medicine-card-title">
-            {med.name}
-          </CardTitle>
         </div>
-        <p className="medicine-card-text">
-          <strong>Type:</strong> {med.type}
-        </p>
-        <p className="medicine-card-text">
-          <strong>In Stock:</strong>{" "}
-          {med.quantity === 0 ? "Out of Stock" : med.quantity}
-        </p>
-        <p className="medicine-card-text">{med.description}</p>
-      </CardBody>
-    </Card>
-  </Col>
-))} 
 
+        <div className="d-flex gap-3 align-items-center flex-wrap">
+          <Input
+            type="text"
+            placeholder="\uD83D\uDD0D Search by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="med-search-input"
+          />
+          <Input
+            type="select"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="med-sort-select"
+          >
+            <option value="az">Sort: A → Z</option>
+            <option value="za">Sort: Z → A</option>
+            <option value="stock">Sort by Stock</option>
+          </Input>
+        </div>
+      </div>
+
+      <h2 className="medicine-title animated-underline">
+        Request Your Medication
+      </h2>
+      <Row>
+        {filteredAndSorted.map((med) => (
+          <Col md={4} key={med._id} className="mb-4">
+            <Card className="medicine-card">
+              <CardImg
+                top
+                src={med.image}
+                alt={med.name}
+                className="medicine-image"
+              />
+              <CardBody>
+                <div className="d-flex align-items-center">
+                  <Input
+                    type="checkbox"
+                    checked={!!selected[med._id]}
+                    onChange={() => handleCheckboxChange(med._id)}
+                    disabled={med.quantity === 0}
+                    style={{ marginRight: "10px" }}
+                  />
+                  <CardTitle tag="h5" className="medicine-card-title">
+                    {med.name}
+                  </CardTitle>
+                </div>
+                <p className="medicine-card-text">
+                  <strong>Type:</strong> {med.type}
+                </p>
+                <p className="medicine-card-text">
+                  <strong>In Stock:</strong>{" "}
+                  {med.quantity === 0 ? "Out of Stock" : med.quantity}
+                </p>
+                <p className="medicine-card-text">{med.description}</p>
+              </CardBody>
+            </Card>
+          </Col>
+        ))}
       </Row>
 
       <div className="text-center mt-3">
-      <Button className="medicine-submit-btn" onClick={handleSubmit}>
-  Continue to Order
-</Button>
-
+        <Button className="medicine-submit-btn" onClick={handleSubmit}>
+          Continue to Order
+        </Button>
       </div>
     </div>
   );
