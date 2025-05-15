@@ -26,25 +26,9 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+const PORT = process.env.PORT || 3001;
 // ✅ إعداد CORS
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://utas-clinic-app-c.onrender.com",
-];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+app.use(cors());
 
 // ✅ الاتصال بـ MongoDB
 const connectString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
@@ -1441,9 +1425,11 @@ app.get("/getAllMedicationRequests", async (req, res) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const clientPath = path.join(__dirname, "../client/build");
-app.use(express.static(clientPath));
+app.use(express.static(path.join(__dirname, "client", "build")));
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 // ✅ تشغيل السيرفر
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
