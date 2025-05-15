@@ -9,9 +9,12 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useNavigate } from "react-router-dom"; // ✅ استخدم التنقل
 import "../Styles/AdminDashboard.css";
 
 const AdminDashboard = () => {
+  const navigate = useNavigate(); // ✅ أنشئ الدالة
+
   return (
     <div className="admin-dashboard-wrapper">
       <Container fluid className="admin-dashboard-container">
@@ -23,8 +26,10 @@ const AdminDashboard = () => {
           Welcome back, Admin! Use the tools below to manage users, monitor
           feedback, and send announcements.
         </p>
-        <br></br>
-        <br></br>
+
+        <br />
+        <br />
+
         <Row className="gx-5 gy-4">
           <Col md="4">
             <Card className="admin-dashboard-card">
@@ -37,7 +42,10 @@ const AdminDashboard = () => {
                   roles.
                 </CardText>
                 <div className="admin-btn-wrapper">
-                  <Button color="primary" href="/ManageUsers">
+                  <Button
+                    color="primary"
+                    onClick={() => navigate("/ManageUsers")}
+                  >
                     Go
                   </Button>
                 </div>
@@ -56,7 +64,10 @@ const AdminDashboard = () => {
                   see.
                 </CardText>
                 <div className="admin-btn-wrapper">
-                  <Button color="primary" href="/AddAnnouncement">
+                  <Button
+                    color="primary"
+                    onClick={() => navigate("/AddAnnouncement")}
+                  >
                     Go
                   </Button>
                 </div>
@@ -74,7 +85,10 @@ const AdminDashboard = () => {
                   Review feedback from users to improve the system and services.
                 </CardText>
                 <div className="admin-btn-wrapper">
-                  <Button color="primary" href="/ViewFeedback">
+                  <Button
+                    color="primary"
+                    onClick={() => navigate("/ViewFeedback")}
+                  >
                     Go
                   </Button>
                 </div>
@@ -82,9 +96,11 @@ const AdminDashboard = () => {
             </Card>
           </Col>
         </Row>
-        <br></br>
-        <br></br>
-        <br></br>
+
+        <br />
+        <br />
+        <br />
+
         <div className="admin-extra-info mt-5">
           <h4>Quick Tips:</h4>
           <ul>
