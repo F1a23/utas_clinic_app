@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Slider from "react-slick";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { SERVER_URL } from "../config";
-
 import {
   Button,
   Input,
+  FormGroup,
+  Label,
   Card,
   CardBody,
   CardTitle,
@@ -72,7 +74,7 @@ const AppointmentsManagement = () => {
   const [confirmModal, setConfirmModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [search, setSearch] = useState("");
-  const [prescriptionExistsModal, setPrescriptionExistsModal] = useState(false);
+  const pageTopRef = useRef(null);
 
   useEffect(() => {
     dispatch(getAppointments());
@@ -88,10 +90,65 @@ const AppointmentsManagement = () => {
   };
 
   const handleUpdate = async () => {
-    await dispatch(
-      updateAppointment({ id: currentEdit._id, updatedData: currentEdit })
-    );
-    setEditModal(false);
+    const { appointmentDate, appointmentTime } = currentEdit;
+    const selectedDate = new Date(appointmentDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate <= today) {
+      pageTopRef.current.scrollIntoView({ behavior: "smooth" });
+      toast.error("❌ Please choose a date after today.");
+      return;
+    }
+
+    const dayOfWeek = selectedDate.getDay();
+    if (dayOfWeek === 5 || dayOfWeek === 6) {
+      pageTopRef.current.scrollIntoView({ behavior: "smooth" });
+      toast.error("❌ Cannot book appointments on Friday or Saturday.");
+      return;
+    }
+
+    const [hour, minute] = appointmentTime.split(":").map(Number);
+    if (
+      isNaN(hour) ||
+      isNaN(minute) ||
+      hour < 8 ||
+      hour > 14 ||
+      (hour === 14 && minute > 0)
+    ) {
+      pageTopRef.current.scrollIntoView({ behavior: "smooth" });
+      toast.error("❌ Appointment time must be between 08:00 and 14:00.");
+      return;
+    }
+
+    try {
+      const availabilityRes = await axios.get(
+        `${SERVER_URL}/checkAppointment`,
+        {
+          params: { date: appointmentDate, time: appointmentTime },
+        }
+      );
+
+      if (availabilityRes.data.isTimeTaken) {
+        pageTopRef.current.scrollIntoView({ behavior: "smooth" });
+        toast.warning("⚠️ This time slot is already booked.");
+        return;
+      }
+
+      await axios.put(
+        `${SERVER_URL}/updateAppointment/${currentEdit._id}`,
+        currentEdit
+      );
+      pageTopRef.current.scrollIntoView({ behavior: "smooth" });
+      toast.success("✅ Appointment updated successfully.");
+      dispatch(getAppointments());
+      setEditModal(false);
+    } catch (error) {
+      pageTopRef.current.scrollIntoView({ behavior: "smooth" });
+      toast.error(
+        error.response?.data?.error || "❌ Failed to update appointment."
+      );
+    }
   };
 
   const openConfirmModal = (id) => {
@@ -107,20 +164,17 @@ const AppointmentsManagement = () => {
 
   const handlePrescription = async (appointment) => {
     try {
-      const formattedDate = new Date(appointment.appointmentDate)
-        .toISOString()
-        .split("T")[0];
-
       const res = await axios.get(`${SERVER_URL}/checkPrescription`, {
         params: {
-          name: appointment.name,
-          date: formattedDate,
+          name: appointment.name, // ✅ استخدم name
+          date: appointment.appointmentDate,
           time: appointment.appointmentTime,
         },
       });
 
       if (res.data.exists) {
-        setPrescriptionExistsModal(true); // ✅ افتح البوكس
+        pageTopRef.current.scrollIntoView({ behavior: "smooth" });
+        toast.warning("⚠️ A prescription already exists for this appointment.");
       } else {
         navigate("/Prescriptions", {
           state: {
@@ -133,7 +187,8 @@ const AppointmentsManagement = () => {
       }
     } catch (err) {
       console.error("Failed to check prescription:", err);
-      toast.error("⚠️ Error checking prescription. Please try again.");
+      pageTopRef.current.scrollIntoView({ behavior: "smooth" });
+      toast.error("❌ Error checking prescription. Please try again.");
     }
   };
 
@@ -163,11 +218,11 @@ const AppointmentsManagement = () => {
   );
 
   return (
-    <Container fluid className="appointments-page">
+    <Container fluid className="appointments-page" ref={pageTopRef}>
+      <ToastContainer position="top-center" autoClose={3000} />{" "}
       <h1 className="appointments-title text-center mb-4">
         Appointments Management
       </h1>
-
       {/* ✅ خانة البحث */}
       <div className="d-flex justify-content-center mb-4">
         <Input
@@ -184,12 +239,10 @@ const AppointmentsManagement = () => {
           }}
         />
       </div>
-
       {status === "loading" && <p className="text-center">Loading...</p>}
       {status === "failed" && (
         <p className="text-center text-danger">Error: {error}</p>
       )}
-
       <Slider {...settings} className="appointments-slider">
         {filteredAppointments.map((app) => (
           <div key={app._id} className="appointment-card-wrapper px-2 py-3">
@@ -225,32 +278,83 @@ const AppointmentsManagement = () => {
           </div>
         ))}
       </Slider>
-
-      {/*  Modal: Prescription Already Exists */}
-      <Modal
-        isOpen={prescriptionExistsModal}
-        toggle={() => setPrescriptionExistsModal(false)}
-      >
-        <ModalHeader toggle={() => setPrescriptionExistsModal(false)}>
-          <FaExclamationTriangle className="text-warning me-2" />
-          Prescription Already Exists
+      {/* ✅ نافذة التعديل */}
+      <Modal isOpen={editModal} toggle={() => setEditModal(!editModal)}>
+        <ModalHeader toggle={() => setEditModal(!editModal)}>
+          Edit Appointment
         </ModalHeader>
-        <ModalBody className="text-center">
-          A prescription has already been entered for this appointment.
-          <br />
-          You cannot submit another one.
-        </ModalBody>
+        {currentEdit && (
+          <ModalBody>
+            <FormGroup>
+              <Label>Name</Label>
+              <Input
+                value={currentEdit.name}
+                onChange={(e) => handleEditChange("name", e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Email</Label>
+              <Input
+                value={currentEdit.email}
+                onChange={(e) => handleEditChange("email", e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Contact No</Label>
+              <Input
+                value={currentEdit.contactNo}
+                onChange={(e) => handleEditChange("contactNo", e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Date</Label>
+              <Input
+                type="date"
+                value={currentEdit.appointmentDate?.slice(0, 10)}
+                onChange={(e) =>
+                  handleEditChange("appointmentDate", e.target.value)
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Time</Label>
+              <Input
+                type="time"
+                value={currentEdit.appointmentTime}
+                onChange={(e) =>
+                  handleEditChange("appointmentTime", e.target.value)
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Service Type</Label>
+              <Input
+                type="select"
+                value={currentEdit.serviceType}
+                onChange={(e) =>
+                  handleEditChange("serviceType", e.target.value)
+                }
+              >
+                <option value="Primary Healthcare">Primary Healthcare</option>
+                <option value="Mental Health">Mental Health</option>
+                <option value="Vaccination">Vaccination</option>
+                <option value="Chronic Disease Management">
+                  Chronic Disease Management
+                </option>
+              </Input>
+            </FormGroup>
+          </ModalBody>
+        )}
         <ModalFooter>
-          <Button
-            color="primary"
-            onClick={() => setPrescriptionExistsModal(false)}
-          >
-            OK
+          <Button color="primary" onClick={handleUpdate}>
+            Save Changes
+          </Button>
+          <Button color="secondary" onClick={() => setEditModal(false)}>
+            Cancel
           </Button>
         </ModalFooter>
       </Modal>
-
-      {/* نافذة التأكيد */}
+      {/* ✅ نافذة التأكيد */}
       <Modal
         isOpen={confirmModal}
         toggle={() => setConfirmModal(!confirmModal)}
@@ -276,3 +380,4 @@ const AppointmentsManagement = () => {
 };
 
 export default AppointmentsManagement;
+
